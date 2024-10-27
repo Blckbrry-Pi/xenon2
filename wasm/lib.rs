@@ -3,7 +3,7 @@
 
 extern crate alloc;
 
-use argon2::{password_hash::Salt, Argon2, PasswordHash};
+use argon2::{password_hash::Salt, Argon2, PasswordHash, PasswordVerifier};
 use base64::Engine;
 
 #[global_allocator]
@@ -141,7 +141,6 @@ pub unsafe fn hash(
   for i in 0..digest.len() {
     *digest_output.add(i) = digest[i];
   }
-  drop(digest_output);
 
   *output_ptr = digest_output;
 }
@@ -157,7 +156,7 @@ pub unsafe fn verify(
   secret_ptr: *const u8,
   secret_len: usize,
 
-  matches: *mut u8,
+  matches: *mut u32,
 ) {
   let digest = core::slice::from_raw_parts(digest_ptr, digest_len);
   let digest = core::str::from_utf8(digest).expect("Invalid hash digest");
@@ -190,7 +189,7 @@ pub unsafe fn verify(
     Argon2::new(algorithm, version, params)
   };
 
-  let password_valid = hash.verify_password(&[&hasher], password).is_ok();
+  let password_valid = hasher.verify_password(password, &hash).is_ok();
 
-  *matches = password_valid as u8;
+  *matches = password_valid as u32;
 }
