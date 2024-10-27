@@ -2,6 +2,9 @@
   "version": "3",
   "packages": {
     "specifiers": {
+      "jsr:@blckbrry/lz4@0.1.6": "jsr:@blckbrry/lz4@0.1.6",
+      "jsr:@blckbrry/lz4@^0.1.6": "jsr:@blckbrry/lz4@0.1.6",
+      "jsr:@blckbrry/polywasm@^0.1.4": "jsr:@blckbrry/polywasm@0.1.4",
       "jsr:@denosaurs/lz4@0.1.4": "jsr:@denosaurs/lz4@0.1.4",
       "jsr:@std/assert@0.221": "jsr:@std/assert@0.221.0",
       "jsr:@std/assert@^0.221.0": "jsr:@std/assert@0.221.0",
@@ -13,6 +16,16 @@
       "npm:@types/node": "npm:@types/node@18.16.19"
     },
     "jsr": {
+      "@blckbrry/lz4@0.1.6": {
+        "integrity": "c0f114c0f822a428cde9618e12bef5bcc2c4a4c2852ec9f17b1c43aa16fedfe1",
+        "dependencies": [
+          "jsr:@blckbrry/polywasm@^0.1.4",
+          "jsr:@std/encoding@0.221"
+        ]
+      },
+      "@blckbrry/polywasm@0.1.4": {
+        "integrity": "5fac34b3dc13dc57c8feef337f81cd690b7f27d2058cb9cc7b454743beec9495"
+      },
       "@denosaurs/lz4@0.1.4": {
         "integrity": "ad5d556c02eb01fe1e0f2e953d7be066a14870afe149b1aed1ced019460f6aa1"
       },
@@ -50,7 +63,8 @@
   "remote": {},
   "workspace": {
     "dependencies": [
-      "jsr:@denosaurs/lz4@0.1.4",
+      "jsr:@blckbrry/lz4@^0.1.6",
+      "jsr:@blckbrry/polywasm@^0.1.4",
       "jsr:@std/crypto@0.221",
       "jsr:@std/encoding@0.221"
     ]

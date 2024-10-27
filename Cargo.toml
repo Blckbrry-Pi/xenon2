@@ -1,10 +1,10 @@
 [package]
-name = "argontwo"
+name = "xenon2"
 description = "argon2 hashing wasm module for deno"
-repository = "https://github.com/denosaurs/argontwo"
+repository = "https://github.com/Blckbrry-Pi/xenon2"
 license = "MIT"
-version = "0.1.0"
-authors = ["Elias Sjögreen"]
+version = "0.2.1"
+authors = ["Skyler Calaman", "Elias Sjögreen"]
 edition = "2021"
 publish = false
 
@@ -14,8 +14,14 @@ path = "wasm/lib.rs"
 
 [dependencies]
 argon2 = { version = "0.5.2", features = ["alloc"] }
-talc = "3.1.1"
+base64 = { version = "0.22.1", default-features = false, features = ["alloc"] }
+wee_alloc = "0.4.5"
 
 [profile.release]
 opt-level = "s"
 lto = true
+
+[profile.tiny]
+opt-level = "s"
+panic = "abort"
+inherits = "release"
